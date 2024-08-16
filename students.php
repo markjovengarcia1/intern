@@ -253,7 +253,7 @@ session_start();
                     });
                 });
             });
-            </script>
+</script>
 
             <div class="search-bar-container">
                 <div class="search-bar">
@@ -264,20 +264,21 @@ session_start();
             </div>
 
             <div class="table-container">
-            <table>
+            <table id="myTable">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>School / University</th>
-            <th>Course</th>
-            <th>Started Date</th>
-            <th>End Date</th>
-            <th>Hours Required</th>
-            <th>Overall Remaining Hours</th>
-            <th>Status</th>
+        <th onclick="sortTable(0)">Name</th>
+        <th onclick="sortTable(1)">School / University</th>
+        <th onclick="sortTable(2)">Course</th>
+        <th onclick="sortTable(3)">Started Date</th>
+        <th onclick="sortTable(4)">End Date</th>
+        <th onclick="sortTable(5)">Hours Required</th>
+        <th onclick="sortTable(6)">Overall Remaining Hours</th>
+        <th onclick="sortTable(7)">Status</th>
+
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tableBody">
         <?php
             if(isset($_POST['btn'])){
                 $search = $_POST['search'];
@@ -351,6 +352,88 @@ session_start();
 
         </main>
     </div>
+    <script>
+            var modal = document.getElementById("addInternModal");
+            var btn = document.getElementById("openModal");
+            var span = document.getElementsByClassName("close")[0];
+
+            btn.onclick = function() {
+                modal.style.display = "block";
+            }
+
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+            // PHP code for fetching student id 
+
+            <?php
+
+                $id = "SELECT * FROM studentinfo";
+                $query = mysqli_query($conn, $id);
+
+                while($get = mysqli_fetch_assoc($query)){
+                    $studid = $get['studid'];
+                }
+
+            ?>
+
+            function sortTable(columnIndex) {
+                var table = document.getElementById("myTable");
+                var rows = table.rows;
+                var switching = true;
+                var shouldSwitch;
+                var direction = "asc"; 
+                var switchCount = 0;
+
+                while (switching) {
+                    switching = false;
+                    var rowsArray = Array.prototype.slice.call(rows, 1); 
+
+                    for (var i = 0; i < rowsArray.length - 1; i++) {
+                        shouldSwitch = false;
+                        var x = rowsArray[i].getElementsByTagName("TD")[columnIndex];
+                        var y = rowsArray[i + 1].getElementsByTagName("TD")[columnIndex];
+
+                        var xValue = x.innerHTML.toLowerCase();
+                        var yValue = y.innerHTML.toLowerCase();
+
+                        if (direction === "asc") {
+                            if (xValue > yValue) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else if (direction === "desc") {
+                            if (xValue < yValue) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (shouldSwitch) {
+                        rowsArray[i].parentNode.insertBefore(rowsArray[i + 1], rowsArray[i]);
+                        switching = true;
+                        switchCount++;
+                    } else {
+                        if (switchCount === 0 && direction === "asc") {
+                            direction = "desc";
+                            switching = true;
+                        }
+                    }
+                }
+            }
+        </script>
+
+
+
+
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- Ajax Script -->
      <!-- <script>
