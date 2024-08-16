@@ -26,11 +26,11 @@ if(isset($_POST['add'])){
     else {
         
         $student = "INSERT INTO studentinfo(fname, mname, lname, age, sex, courseid, schoolid, hrequired, startdate, end_date) VALUES('$Fname','$Mname','$Lname', 
-        '$age', '$seex','$courses', '$school', '$reqhours', '$Sdate', '$Edate');";
-        $query = mysqli_query($conn, $student); 
+        '$age', '$sex','$courses', '$school', '$reqhours', '$Sdate', '$Edate');";
+        $query = mysqli_query($conn, $student);
 
         echo "<script>window.alert('Register Successfully!');</script>";
-        echo "<script>window.location,assign('dashboard.php')</script>";
+        echo "<script>window.location.assign('dashboard.php')</script>";
     } 
     
         // if($query){

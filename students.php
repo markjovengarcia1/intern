@@ -157,7 +157,7 @@ session_start();
                             $courseid = $row['courseid'];
                             $course = $row['course'];
                     ?>
-                            <option value="<?php $courseid; ?>"><?php echo $course;?></option>        
+                            <option value="<?php echo $courseid; ?>"><?php echo $course;?></option>        
                     <?php
                         }
 
@@ -185,7 +185,7 @@ session_start();
                             $Sid = $row['id'];
                             $school = $row['schoolname'];
                     ?>    
-                            <option value="<?php $Sid; ?>"><?php echo $school;?></option>
+                            <option value="<?php echo $Sid; ?>"><?php echo $school;?></option>
                     <?php
                         }
                     ?>
@@ -227,6 +227,18 @@ session_start();
                     modal.style.display = "none";
                 }
             }
+            // PHP code for fetching student id 
+
+            <?php
+
+                $id = "SELECT * FROM studentinfo";
+                $query = mysqli_query($conn, $id);
+
+                while($get = mysqli_fetch_assoc($query)){
+                    $studid = $get['studid'];
+                }
+
+            ?>
 
             // Add double-click event listener to table rows
             document.addEventListener('DOMContentLoaded', function() {
@@ -237,7 +249,7 @@ session_start();
                         // Get intern details from the row (e.g., intern ID)
                         var internId = this.getAttribute('data-intern-id');
                         // Redirect to the intern's detail page
-                        window.location.href = 'internInfo.php'
+                        window.location.href = 'internInfo.php?rowid=<?php echo $studid; ?>';
                     });
                 });
             });
@@ -255,7 +267,6 @@ session_start();
             <table>
     <thead>
         <tr>
-            <th>Id</th>
             <th>Name</th>
             <th>School / University</th>
             <th>Course</th>
@@ -305,11 +316,11 @@ session_start();
                 }
             }
             else {
-                $sql = "SELECT * FROM studentinfo INNER JOIN school ON studentinfo.schoolid = school.id INNER JOIN coursetbl ON coursetbl.courseid = studentinfo.courseid ORDER BY studentinfo.id DESC;";
+                $sql = "SELECT * FROM studentinfo INNER JOIN school ON studentinfo.schoolid = school.id INNER JOIN coursetbl ON coursetbl.courseid = studentinfo.courseid ORDER BY studid DESC;";
                 $query = mysqli_query($conn, $sql);
 
                 while($row = mysqli_fetch_assoc($query)){
-                    $id = $row['id'];
+                    $id = $row['studid'];
                     $fname  = $row['fname'];
                     $mname  = $row['mname'];
                     $lname  = $row['lname'];
@@ -320,10 +331,9 @@ session_start();
                     $start = $row['startdate'];
                     $end = $row['end_date'];
                     $hours = $row['hrequired'];
-                    $status = $row['status_id'];
+                    $status = $row['status'];
 
                     echo "<tr class='highlight'>";
-                    echo "<td>".$id."</td>";
                     echo "<td>" .$lname. "," .$fname. " " .$mname. "</td>";
                     echo "<td>" .$school. "</td>";
                     echo "<td>" .$course."</td>";
