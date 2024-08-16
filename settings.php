@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modals Example</title>
-    <link rel="stylesheet" href="css/addup.css">
+    <link rel="stylesheet" href="css/settings.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" type="png" href="img/logo-icon.png">
 </head>
-
 <body>
-
-        <?php include 'component/navbar.php'; ?>
-
-        <div class="main-content">
+    <?php include 'component/navbar.php';?> 
+    
+   
+    <div class="main-content">
             <h1>Manage Entities</h1>
 
             <!-- Buttons to open modals -->
@@ -61,7 +60,9 @@
             </div>
         </div>
 
-        <script src="js/addup.js"></script>
-</body>
 
+
+    <script src="js/addup.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
 </html>
