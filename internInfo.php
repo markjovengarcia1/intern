@@ -1,3 +1,31 @@
+<?php
+
+require 'server.php';
+
+if (!empty($_GET['rowid'])) {
+    $rowid = $_GET['rowid'];
+    $fetch = "SELECT * FROM studentinfo INNER JOIN school ON studentinfo.schoolid = school.id INNER JOIN coursetbl ON coursetbl.courseid = studentinfo.courseid WHERE studid LIKE '$rowid';";
+    $query = mysqli_query($conn, $fetch);
+
+    while($row = mysqli_fetch_assoc($query)){
+        $fname = $row['fname'];  
+        $mname = $row['mname'];
+        $lname = $row['lname'];
+        $age = $row['age'];
+        $course = $row['course'];
+        $school = $row['schoolname'];
+
+
+
+    }
+}
+
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -9,27 +37,27 @@
     <link rel="icon" type="png" href="img/logo-icon.png">
 </head>
 <body>
-<?php include 'component/navbar.php';?> 
     <div class="container">
-        
+        <?php include 'component/navbar.php';?> 
         <div class="main-content">
-    <div class="intern-info">
-        <div class="profile">
-            <img src="img/kapatidnijoanna.jpg" alt="Profile Picture">
-            <h2>Kapatid ni Joanna</h2>
-            <p>Cavite State University - Naic</p>
+        <div class="intern-info">
+            <div class="profile">
+                <img src="img/kapatidnijoanna.jpg" alt="Profile Picture">
+                <h2><?php echo $fname, " ", $mname[0] ,". ", $lname; ?></h2>
+                <p><?php echo $school; ?></p>
         </div>
-    <div class="details">
-    <div class="detail">Name: Mark Joven A. Garcia</div>
-    <div class="detail">Birth  Date: 04/05/03</div>
-    <div class="detail">Age: 21</div>
-    <div class="detail">Address: Timalan Conception Naic, Cavite</div>
-    <div class="detail">Contact No: 093564457486</div>
-    <div class="detail">Guardian: Maryln A. Garcia</div>
-    <div class="detail">Parent Contact No: 093564457486</div>
-    <div class="button-detail">
-        <button class="btn-time">UPDATE</button>
-        <button class="btn-time2">DELETE</button>
+        <div class="details">
+        <div class="detail">Name: <?php echo $fname, " ", $mname[0] ,". ", $lname; ?></div>
+        <div class="detail">Age: <?php echo $age; ?></div>
+        <div class="detail">Course: <?php echo $course; ?></div>
+        <div class="detail">University: <?php echo $school; ?></div>
+        <div class="detail">Address: Timalan Conception Naic, Cavite</div>
+        <div class="detail">Contact No: 093564457486</div>
+        <div class="detail">Guardian: Maryln A. Garcia</div>
+        <div class="detail">Parent Contact No: 093564457486</div>
+        <div class="button-detail">
+            <button class="btn-time">UPDATE</button>
+            <button class="btn-time2">DELETE</button>
     </div>
 </div>
     <div class="logo">

@@ -16,7 +16,8 @@
     <link rel="icon" type="png" href="img/logo-icon.png">
 </head>
 <body>
-<?php include 'component/navbar.php';?> 
+    <div class="container">
+        <?php include 'component/navbar.php';?> 
         <main class="main-content">
             <header>
                 <h1>Intern Analytics</h1>
@@ -57,22 +58,36 @@
             </div>
         </main>
     </div>
+    <?php
+
+        $line1 = "SELECT * FROM studentinfo WHERE status = 'On-Going';";
+        $query = mysqli_query($conn, $line1);
+
+        while($row = mysqli_fetch_assoc($query)){
+            $arr = array();
+            $status = $row['status'];
+
+        }
+
+
+    ?>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        const status = <?php echo json_encode($status); ?>;
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
                 datasets: [{
-                    label: 'Dataset 1',
+                    label: 'On-Going',
                     data: [250, 150, 300, 500, 400, 600, 350, 550, 200, 450],
                     borderColor: 'blue',
                     fill: false
                 }, {
-                    label: 'Dataset 2',
-                    data: [150, 200, 250, 400, 300, 500, 450, 400, 350, 600],
-                    borderColor: 'green',
+                    label: 'Completed',
+                    data: [150, 200, 250, 400, 300, 500, 450, 400, 350, 600], //array
+                    borderColor: 'red   ',
                     fill: false
                 }]
             },

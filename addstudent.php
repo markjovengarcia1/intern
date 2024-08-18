@@ -7,9 +7,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_FILES['fileUpload']['error'] !== UPLOAD_ERR_OK) {
         die("Upload failed with error code " . $_FILES['fileUpload']['error']);
     }
+// <<<<<<< HEAD
+//     else {
+        
+//         $student = "INSERT INTO studentinfo(fname, mname, lname, age, sex, courseid, schoolid, hrequired, startdate, end_date) VALUES('$Fname','$Mname','$Lname', 
+//         '$age', '$sex','$courses', '$school', '$reqhours', '$Sdate', '$Edate');";
+//         $query = mysqli_query($conn, $student);
+
+//         echo "<script>window.alert('Register Successfully!');</script>";
+//         echo "<script>window.location.assign('dashboard.php')</script>";
+//     } 
+    
+//         // if($query){
+//         //     move_uploaded_file($intern_temp_name, $img_folder);
+// =======
 
     $tmpFilePath = $_FILES['fileUpload']['tmp_name'];
     $imageFileType = strtolower(pathinfo($_FILES['fileUpload']['name'], PATHINFO_EXTENSION));
+
 
     // Check if temporary file exists
     if (file_exists($tmpFilePath)) {
